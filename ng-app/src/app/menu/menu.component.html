@@ -1,0 +1,21 @@
+<ul class="nav nav-pills nav-stacked">
+  <li role="presentation" routerLinkActive="active"><a routerLink="/list">List</a></li>
+  <li role="presentation" routerLinkActive="active"><a routerLink="/add">Add</a></li>
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" (click)="onViewClick()">
+      View <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li *ngFor="let student of students">
+        <a  (click)="showDetail(student)">
+          {{student.name}}
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li role="presentation" routerLinkActive="active"><a routerLink="/courses">Course list</a></li>
+  <li role="presentation" routerLinkActive="active"><a routerLink="/add-course">Add Course</a></li>
+
+</ul>
+
+
