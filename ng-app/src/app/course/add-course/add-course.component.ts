@@ -10,10 +10,17 @@ import {Router} from '@angular/router';
   styleUrls: ['./add-course.component.css']
 })
 export class AddCourseComponent implements OnInit {
+  courses: Course[];
 
   constructor(private courseService:CourseServerService,private router:Router) { }
   course:any = {};
   ngOnInit() {
+    this.courseService.getCourse()
+    .subscribe(courses=>this.courses = courses, (error) => {
+      if (error.status === 401) {
+        this.router.navigate((['login']),{queryParams:{source:'course'}})
+      }
+    });
 
   }
 

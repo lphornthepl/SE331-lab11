@@ -12,12 +12,17 @@ import {Router} from "@angular/router";
 export class StudentsComponent {
   students: Student[];
 
-  constructor(private studentDataService: StudentsDataService, private router: Router ) {
+  constructor(private studentDataService: StudentsDataService, private router: Router) {
   }
 
   ngOnInit() {
     this.studentDataService.getStudentsData()
-      .subscribe(students => this.students = students);
+      .subscribe(students => this.students = students, (error) => {
+        if (error.status === 401) {
+          this.router.navigate((['login']),{queryParams:{source:'student'}})
+        }
+      });
+
   }
 
 
@@ -43,7 +48,7 @@ export class StudentsComponent {
       student.penAmount--;
   }
 
-  showDetail(student: Student){
-    this.router.navigate(['/detail',student.id]);
+  showDetail(student: Student) {
+    this.router.navigate(['/detail', student.id]);
   }
 }
